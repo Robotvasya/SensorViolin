@@ -1,6 +1,6 @@
 # Сенсорная скрипка на Arduino
 
-<img src="images/001.jpg" height="500px" /> <img src="images/008.jpg" height="500px" />
+<img src="images/001.jpg?sanitize=true&raw=true" height="500px" /> <img src="images/008.jpg?sanitize=true&raw=true" height="500px" />
 
 
 ### Идея:
