@@ -1,6 +1,16 @@
 # Сенсорная скрипка на Arduino
 
 <img src="images/001.jpg" width="30%" />
+<img src="images/002.jpg" width="30%" />
+<img src="images/003.jpg" width="30%" />
+<img src="images/004.jpg" width="30%" />
+<img src="images/005.jpg" width="30%" />
+<img src="images/006.jpg" width="30%" />
+<img src="images/007.jpg" width="30%" />
+<img src="images/008.jpg" width="30%" />
+<img src="images/009.jpg" width="30%" />
+<img src="images/010.jpg" width="30%" />
+
 
 ### Идея:
 Детская игрушка (переделанная из китайской) для воспроизведения музыки в момент зажимания струн рукой.
