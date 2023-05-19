@@ -1,0 +1,26 @@
+DFPlayer MP3 module - high quiescent power consumption and clicks when power applied and removed - FIX!
+
+The DFPlayer is a great little MP3 player module at a fantastic price, but there's a really odd design choice; it has a high quiescent current of about 25ma, requiring you to cut the power to it with a PFET when not in use, and, worse, it suffers from power on/off clicks when you do that.
+
+The schematic of the module is basically the reference design from here (the mp3 player chip vendor's page)
+
+http://www.yxin18.com/kp/2015102450.html
+
+and they're using a bog-standard no-name 8-pin 8002 audio amplifier chip (in this case a class AB one, not a PAM8002 which is class D, but hey, the whole board costs about a buck), anyway it's a BTL amplifier, so + and - are both floating at VCC/2 when no sound is playing.
+
+This requires the amp to put a little care into avoiding pops/clicks when power is applied and removed, and the 8002 designers kinda did this already; here's a generic 8002 amp datasheet;
+
+http://thaieasyelec.com/downloads/EFDV308/HXJ8002_Miniature_Audio_Amplifier_Datasheet.pdf
+
+They have both a SHUTDOWN pin and a bias cap so that the speaker ramps up and down subsonically... 
+
+Anyway looking at the DFPlayer board I see they just have the SHUTDOWN pin (pin 1) wired to GND, i.e. always-on, via a 0-ohm resistor (if you look next to pin 1 on the 8-pin chip on a generic DFPlayer module, there's a "000" resistor next to it).
+
+What's totally bizarre is that the MP3 player chip is set up to output a "BUSY/IDLE" signal (comes out on pin 1 of the DFPlayer module) which is the right polarity and basically ideal to drive the SHUTDOWN on the 8002 amplifer.
+
+..and lo and behold, if you pull off the 0-ohm resistor and wire pin 1 of the 8002 straight to the BUSY output pin of the module - you get a double win - no more power on/off clicks at all (now totally silent) AND halves the quiescent power consumption of the module (takes about 10mA off it).
+
+WTF? No idea why they didn't do this... Anyway, there's your easy fix...  now you can gate the power to the entire module (still necessary, it sucks down >10ma even when not doing anything) but at least it doesn't click when you do it....
+
+
+http://work-now-dammit.blogspot.com/2016/08/dfplayer-mp3-module-power-onoff-clicks.html?m=1
